@@ -1,10 +1,10 @@
 
 <div class="mx-auto flex flex-col w-3/5 my-10">
-  <div class="mx-auto max-w-4/5 flex flex-row justify-center gap-10">
+  <div class="chair-area">
     <app-card *ngFor="let card of upperCards" [point]="card.point" [name]="card.name" />
   </div>
   <div class="w-full my-10 h-28 rounded-full border border-blue-400"></div>
-  <div class="mx-auto max-w-4/5 flex flex-row justify-center gap-10">
+  <div class="chair-area">
     <app-card *ngFor="let card of lowerCards" [point]="card.point" [name]="card.name" />
   </div>
 </div>

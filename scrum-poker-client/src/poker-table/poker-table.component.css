@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .chair-area {
+    @apply mx-auto max-w-full flex flex-row justify-center gap-10
+  }
+}
