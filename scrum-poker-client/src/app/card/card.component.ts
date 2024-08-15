@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -10,4 +10,9 @@ import { Component, Input } from '@angular/core';
 export class CardComponent {
   @Input() point: number = 0;
   @Input() name: string = "";
+  @Output() onClick = new EventEmitter<number>();
+
+  handleClick() {
+    this.onClick.emit(this.point);
+  }
 }

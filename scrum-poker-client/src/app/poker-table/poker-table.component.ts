@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
     CardComponent,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './poker-table.component.html',
   styleUrl: './poker-table.component.css'
