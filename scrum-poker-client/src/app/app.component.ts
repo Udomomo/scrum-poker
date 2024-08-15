@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ScrumPokerPageComponent } from "../scrum-poker-page/scrum-poker-page.component";
-import { CardComponent } from "../card/card.component";
+import { ScrumPokerPageComponent } from "./scrum-poker-page/scrum-poker-page.component";
+import { CardComponent } from "./card/card.component";
 
 @Component({
   selector: 'app-root',
