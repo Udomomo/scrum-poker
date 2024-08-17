@@ -1,8 +1,8 @@
-<div *ngIf="name;else playerNameForm">
-  <app-poker-table class="mx-auto flex flex-col w-3/5 my-10"></app-poker-table>
+<div *ngIf="myName;else playerNameForm">
+  <app-poker-table [myName]="myName" class="mx-auto flex flex-col w-3/5 my-10"></app-poker-table>
   <app-deck class="mt-28 mx-auto max-w-full flex flex-row justify-center gap-4"></app-deck>
 </div>
 
 <ng-template #playerNameForm>
-  <app-player-name-form class="h-screen w-screen flex justify-center items-center"></app-player-name-form>
+  <app-player-name-form (onSubmit)="submitName($event)" class="h-screen w-screen flex justify-center items-center"></app-player-name-form>
 </ng-template>

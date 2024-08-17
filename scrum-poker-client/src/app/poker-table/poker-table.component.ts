@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardComponent } from "../card/card.component";
 import { Card, Status } from '../models/card';
 import { CommonModule } from '@angular/common';
@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './poker-table.component.css'
 })
 export class PokerTableComponent {
+  @Input() myName: string = "";
+
   upperCards: Card[] = [
     { status: Status.VISIBLE, point: 1, name: "John" },
     { status: Status.HIDDEN, point: 2, name: "Jack" },

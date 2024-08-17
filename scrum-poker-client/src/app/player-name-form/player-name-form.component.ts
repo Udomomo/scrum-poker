@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -11,5 +11,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './player-name-form.component.css'
 })
 export class PlayerNameFormComponent {
+  @Output() onSubmit = new EventEmitter<string>();
+
   playerName = "";
+
+  handleSubmit() {
+    this.onSubmit.emit(this.playerName);
+  }
 }

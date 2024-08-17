@@ -17,5 +17,9 @@ import { PlayerNameFormComponent } from '../player-name-form/player-name-form.co
   styleUrl: './scrum-poker-page.component.css'
 })
 export class ScrumPokerPageComponent {
-  name = ""
+  myName = ""
+
+  submitName(name: string) {
+    this.myName = name
+  }
 }
