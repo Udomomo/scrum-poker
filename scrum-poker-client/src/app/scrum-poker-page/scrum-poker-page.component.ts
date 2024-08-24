@@ -4,6 +4,7 @@ import { DeckComponent } from '../deck/deck.component';
 import { CommonModule } from '@angular/common';
 import { PlayerNameFormComponent } from '../player-name-form/player-name-form.component';
 import { io } from 'socket.io-client';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-scrum-poker-page',
@@ -18,12 +19,15 @@ import { io } from 'socket.io-client';
   styleUrl: './scrum-poker-page.component.css'
 })
 export class ScrumPokerPageComponent {
+  constructor(private socket: SocketService) { }
+
   myName = ""
-  // TODO: effectに独立させて使い回す
-  socket = io("http://localhost:3000");
 
   submitName(name: string) {
     this.myName = name;
-    this.socket.emit("join", name);
+    this.socket.submitName(name);
+  }
+
+  onSelectCard(point: number) {
   }
 }

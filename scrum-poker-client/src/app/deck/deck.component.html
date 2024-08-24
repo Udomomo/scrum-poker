@@ -1,3 +1,3 @@
 <div class="mx-auto max-w-full flex flex-row justify-center gap-4">
-  <app-card *ngFor="let point of points" [isSet]="true" [isVisible]="true" [point]="point" name=''/>
+  <app-card *ngFor="let point of points" [isSet]="true" [isVisible]="true" [point]="point" name='' (onClick)="handleClick($event)"/>
 </div>
