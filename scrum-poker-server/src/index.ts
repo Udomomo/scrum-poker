@@ -1,6 +1,7 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import { DbClient } from './db';
 
 const app = express();
 const server = createServer(app);
@@ -10,16 +11,25 @@ const io = new Server(server, {
   }
 });
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello world!!</h1>');
-});
+async function main() {
+  const db = DbClient.initDb();
 
-io.on('connection', (socket) => {
-  socket.on('join', (name) => {
-    console.log(`${name} joined`);
+  io.on('connection', (socket) => {
+    socket.on('join', (name) => {
+      db.insertPlayer(name)
+        .then((player) => {
+          console.log (`Player has joined | id: ${player.id}, name: ${player.name}`);
+          io.emit('player', player);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
   });
-});
 
-server.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+  server.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });
+}
+
+main();
