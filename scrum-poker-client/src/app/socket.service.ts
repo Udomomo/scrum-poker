@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Config } from './config';
+import { Observable } from 'rxjs';
+import { Player } from './models/player';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +16,14 @@ export class SocketService {
 
   submitName(name: string) {
     this.socket.emit("join", name);
+  }
+
+  getName() {
+    return new Observable<Player>(observer => {
+      this.socket.on("player", (player: Player) => {
+        observer.next(player);
+      });
+      return () => { this.socket.disconnect(); };
+    });
   }
 }
