@@ -11,7 +11,6 @@ import { SocketService } from '../socket.service';
   standalone: true,
   imports: [
     PokerTableComponent,
-    DeckComponent,
     PlayerNameFormComponent,
     CommonModule,
   ],
@@ -19,17 +18,12 @@ import { SocketService } from '../socket.service';
   styleUrl: './scrum-poker-page.component.css'
 })
 export class ScrumPokerPageComponent {
-  myName = ""
-  myId = 0;
+  myName = "";
   
   constructor(private socket: SocketService) { }
 
   submitName(name: string) {
     this.myName = name;
     this.socket.submitName(name);
-  }
-
-  onSelectCard(point: number) {
-    this.socket.updatePoint(this.myId, point);
   }
 }

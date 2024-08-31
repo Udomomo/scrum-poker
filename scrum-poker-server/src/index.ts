@@ -30,7 +30,7 @@ async function main() {
       db.updatePoint(arg.id, arg.point)
         .then(() => {
           console.log (`Player has updated point | id: ${arg.id}, point: ${arg.point}`);
-          io.emit('updateDone', arg);
+          io.emit('updateDone', arg.id);
         })
         .catch((err) => {
           console.error(err);

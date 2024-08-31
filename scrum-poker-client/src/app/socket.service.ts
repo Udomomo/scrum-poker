@@ -32,9 +32,9 @@ export class SocketService {
   }
 
   updateDone() {
-    return new Observable<{id: number, point: number}>(observer => {
-      this.socket.on("updateDone", (arg: {id: number, point: number}) => {
-        observer.next(arg);
+    return new Observable<number>(observer => {
+      this.socket.on("updateDone", (id: number) => {
+        observer.next(id);
       });
       return () => { this.socket.disconnect(); };
     })
