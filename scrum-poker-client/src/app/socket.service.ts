@@ -18,6 +18,10 @@ export class SocketService {
     this.socket.emit("join", name);
   }
 
+  updatePoint(id: number, point: number) {
+    this.socket.emit("updatePoint", { id: id, point: point });
+  }
+
   getName() {
     return new Observable<Player>(observer => {
       this.socket.on("player", (player: Player) => {
@@ -25,5 +29,14 @@ export class SocketService {
       });
       return () => { this.socket.disconnect(); };
     });
+  }
+
+  updateDone() {
+    return new Observable<void>(observer => {
+      this.socket.on("updateDone", () => {
+        observer.next();
+      });
+      return () => { this.socket.disconnect(); };
+    })
   }
 }

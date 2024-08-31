@@ -20,13 +20,19 @@ import { SocketService } from '../socket.service';
 })
 export class ScrumPokerPageComponent implements OnInit {
   myName = ""
+  myId = 0;
   
   constructor(private socket: SocketService) { }
 
   ngOnInit(): void {
     this.socket.getName().subscribe(player => {
       console.log(`${player.name} joined`);
+      this.myId = player.id;
     });
+
+    this.socket.updateDone().subscribe(() => {
+      console.log(`selected card`);
+    })
   }
 
   submitName(name: string) {
@@ -35,5 +41,6 @@ export class ScrumPokerPageComponent implements OnInit {
   }
 
   onSelectCard(point: number) {
+    this.socket.updatePoint(this.myId, point);
   }
 }

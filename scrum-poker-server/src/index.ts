@@ -15,7 +15,7 @@ async function main() {
   const db = DbClient.initDb();
 
   io.on('connection', (socket) => {
-    socket.on('join', (name) => {
+    socket.on('join', (name: string) => {
       db.insertPlayer(name)
         .then((player) => {
           console.log (`Player has joined | id: ${player.id}, name: ${player.name}`);
@@ -25,6 +25,17 @@ async function main() {
           console.error(err);
         });
     });
+
+    socket.on('updatePoint', (arg: {id: number, point: number}) => {
+      db.updatePoint(arg.id, arg.point)
+        .then(() => {
+          console.log (`Player has updated point | id: ${arg.id}, point: ${arg.point}`);
+          io.emit('updateDone');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    })
   });
 
   server.listen(3000, () => {

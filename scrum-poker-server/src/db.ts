@@ -25,11 +25,28 @@ export class DbClient {
       this.db.run(
         `INSERT INTO scrum_poker (name, point) VALUES (?, 0);`, 
         name,
-        function (err) {
+        function (err: Error | null) {
           if (err) {
             reject(err);
           } else {
             resolve({ id: this.lastID, name, point: 0 });
+          }
+        }
+      );
+    });
+  }
+
+  updatePoint(id: number, point: number): Promise<void> {
+    return new Promise ((resolve, reject) => {
+      this.db.run(
+        `UPDATE scrum_poker SET point = ? WHERE id = ?;`, 
+        point,
+        id,
+        function (err: Error | null) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
           }
         }
       );
