@@ -1,7 +1,8 @@
 export type Card = {
-  status: Status;
-  point: number;
+  id: number;
   name: string;
+  point: number;
+  status: Status;
 }
 
 export const Status = {

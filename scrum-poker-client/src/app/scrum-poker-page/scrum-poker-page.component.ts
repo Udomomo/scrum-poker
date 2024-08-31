@@ -18,22 +18,11 @@ import { SocketService } from '../socket.service';
   templateUrl: './scrum-poker-page.component.html',
   styleUrl: './scrum-poker-page.component.css'
 })
-export class ScrumPokerPageComponent implements OnInit {
+export class ScrumPokerPageComponent {
   myName = ""
   myId = 0;
   
   constructor(private socket: SocketService) { }
-
-  ngOnInit(): void {
-    this.socket.getName().subscribe(player => {
-      console.log(`${player.name} joined`);
-      this.myId = player.id;
-    });
-
-    this.socket.updateDone().subscribe(() => {
-      console.log(`selected card`);
-    })
-  }
 
   submitName(name: string) {
     this.myName = name;
