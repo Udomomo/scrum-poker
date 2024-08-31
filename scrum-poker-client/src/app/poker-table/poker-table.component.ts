@@ -40,6 +40,13 @@ export class PokerTableComponent implements OnInit {
       this.placeCard(id);
       console.log(`selected card`);
     })
+
+    this.socket.getAllPlayers().subscribe(players => {
+      console.log(`show down!`)
+      players.forEach(player => {
+        this.cardMap.set(player.id, { id: player.id, name: player.name, point: player.point, status: Status.VISIBLE });
+      });
+    })
   }
 
   private placeCard(id: number) {
@@ -50,15 +57,19 @@ export class PokerTableComponent implements OnInit {
     card.status = Status.HIDDEN;
   }
 
-  get upperCards() {
+  upperCards() {
     return Array.from(this.cardMap.values()).sort((a, b) => a.id - b.id).filter((_, i) => i % 2 === 0);
   }
 
-  get lowerCards() {
+  lowerCards() {
     return Array.from(this.cardMap.values()).sort((a, b) => a.id - b.id).filter((_, i) => i % 2 === 1);
   }
 
   onSelectCard(point: number) {
     this.socket.updatePoint(this.myId, point);
+  }
+
+  showDown() {
+    this.socket.showDown();
   }
 }

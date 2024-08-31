@@ -52,4 +52,25 @@ export class DbClient {
       );
     });
   }
+
+  getAllPlayers(): Promise<Player[]> {
+    return new Promise ((resolve, reject) => {
+      this.db.all(
+        `SELECT id, name, point FROM scrum_poker;`, 
+        [],
+        function (err: Error | null, rows) {
+          if (err) {
+            reject(err);
+          } else {
+            const players = rows.map((row: any) => ({
+              id: row.id,
+              name: row.name,
+              point: row.point
+            }));
+            resolve(players);
+          }
+        }
+      );
+    });
+  }
 }

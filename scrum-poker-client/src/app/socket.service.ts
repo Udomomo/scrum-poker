@@ -22,6 +22,10 @@ export class SocketService {
     this.socket.emit("updatePoint", { id: id, point: point });
   }
 
+  showDown() {
+    this.socket.emit("showDown");
+  }
+
   getName() {
     return new Observable<Player>(observer => {
       this.socket.on("player", (player: Player) => {
@@ -37,6 +41,15 @@ export class SocketService {
         observer.next(id);
       });
       return () => { this.socket.disconnect(); };
+    })
+  }
+
+  getAllPlayers() {
+    return new Observable<Player[]>(observer => {
+      this.socket.on("allPlayers", (players: Player[]) => {
+        observer.next(players);
+      });
+      return () => {this.socket.disconnect(); }
     })
   }
 }

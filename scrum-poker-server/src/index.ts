@@ -35,6 +35,14 @@ async function main() {
         .catch((err) => {
           console.error(err);
         });
+    });
+
+    socket.on('showDown', () => {
+      db.getAllPlayers()
+        .then((players) => {
+          console.log (`Show down | player counts: ${players.length}`);``
+          io.emit('allPlayers', players);
+        });
     })
   });
 
